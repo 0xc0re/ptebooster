@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="container-fluid text-center">    
+        <div class="row content">
+          <div class="col-sm-1 sidenav">
+            
+          </div>
+          <div class="col-sm-10 text-center"> 
+                {% for object in object_list %}
+              <h4 class="card-title">Question</h4>
+              
+              <table class="table table-hover">
+                  <thead>
+                    <tr>
+                     <p class="text-justify" ><strong> Look at the text below. In 40 seconds, you must read this text aloud as naturally and
+                         clearly as possible. You have 40 seconds to read aloud. </strong></p>
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                        {% if object.audio %}
+                   
+                      <tr>
+                            
+                          <div class="row">
+                              <div class="col-sm-4"></div>
+                                    
+                                        <div class="col-sm-4" style="background-color: #eee;">
+                                            <h5 class="text-center"> Recorded Answer </h5>
+                                            <p> Current Status :</p>
+                                
+                                            <p> Playing in <span id="countdowntimer">8 </span> Seconds</p>
+
+                                            <progress value="0" max="8" id="progressBar"></progress>
+                                            
+                                        </div>
+                                        <div class="col-sm-4"></div></div>
+                      </tr>
+                      
+                      <tr><audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 8000)" id="audioContent" controls="false" controlsList="nodownload" ><source src="{{ object.audio.url }}" type="audio/mpeg"></audio></tr>{% endif %}
+                    <tr><p id="replacewords" class="text-justify"> 
+                        {% for word in object.paragraph %}
+                        {% if word|lower in object.answers %}
+                        <select name="answer" class=" intro-lead-in" data-step='2'>
+                        
+                            <option value=""> </option>
+                            {% if word|lower in object.option_1 %}{% for option in object.option_1 %}<option value="{{option}}">{{option}}</option>{% endfor %}
+                            {% elif word|lower in object.option_2 %}{% for option in object.option_2 %}<option value="{{option}}">{{option}}</option>{% endfor %}
+                            {% elif word|lower in object.option_3 %}{% for option in object.option_3 %}<option value="{{option}}">{{option}}</option>{% endfor %}
+                            {% elif word|lower in object.option_4 %}{% for option in object.option_4 %}<option value="{{option}}">{{option}}</option>{% endfor %}
+                            {% elif word|lower in object.option_5 %}{% for option in object.option_5 %}<option value="{{option}}">{{option}}</option>{% endfor %}
+                            {% endif %}
+                          </select>
+                        
+                        
+                        
+                         {% else %}{{ word }}{% endif %}
+
+                        {% endfor %}
+                    </p></tr>
+                    
+                    {% endfor %}
+                    <tr>
+                     
+                        
+                        <th scope="col" class="text-right"><button type="button" class="btn btn-success getvalue">Check my Answers</button></th>
+                      </tr>
+                      <tr>
+                         
+                        </tr>
+                  </tbody>
+                  
+
+                </table>
+              
+          </div>
+          <div class="col-sm-1 sidenav">
+          
+        
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+          var timeleft = 8;
+          var downloadTimer = setInterval(function(){
+            document.getElementById("progressBar").value = 8 - --timeleft;
+            document.getElementById("countdowntimer").textContent = timeleft;
+            if(timeleft <= 0)
+              clearInterval(downloadTimer);
+          },1000);
+          document.getElementById("audioContent").autoplay;
+      </script>
+    {% if is_paginated %}
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class=" page-item disabled"><span class="page-link">&laquo;</span></li>
+      {% endif %}
+      {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+          <li class="page-item active "><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class=" page-item disabled"><span class="page-link">&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+
+</div>
+      {% endblock %}
+    
+
+
+

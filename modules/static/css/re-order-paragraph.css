@@ -1,0 +1,71 @@
+.connected, .sortable, .exclude, .handles {
+    margin: auto;
+    padding: 0;
+    width: 310px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+    .sortable.grid {
+    overflow: hidden;
+    }
+    .connected li, .sortable li, .exclude li, .handles li {
+        color: #313135;
+        list-style: none;
+        border: 1px solid #e8e8e8;
+        background: #fff;
+        font-family: "Tahoma";
+        margin: 5px;
+        padding: 10px 6px;
+        box-shadow: 1px 2px 4px #d6d6d6;
+      cursor:pointer;
+    }
+    .no2 > li{
+    color:#fff;
+     background:#56b5e3;
+     border: 1px solid #56b5e3;
+    }
+    
+    .handles span {
+    cursor: move;
+    }
+    li.disabled {
+    opacity: 0.5;
+    }
+    .sortable.grid li {
+    line-height: 80px;
+    float: left;
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    }
+    li.highlight {
+    background: #edede5;
+    }
+    #connected {
+    width: 60%;
+    overflow: hidden;
+    margin: auto;
+    }
+    .connected {
+    float: left;
+    width: 48%;
+    min-height:389px;
+    background:#f6f6f6;
+    margin:5px;
+    }
+    .connected.no2 {
+    float: right;
+    }
+    .sortable-placeholder {
+    background:#e8e8e8;
+     padding: 10px 6px;
+    }
+    .center-block {
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+    }

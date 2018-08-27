@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Free PTE Study Hub</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/heroic-features.css" %}" rel="stylesheet">
+    <link href="{% static "css/re-order-paragraph.css" %}" rel="stylesheet">
+<style>
+    
+</style>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/modules/">PTE Booster</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/modules/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+   {% block content %}
+
+   {% endblock %}
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    
+    <script src="{% static "vendor/jquery/jquery.min.js" %}" ></script>
+    <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+    <script>
+       function checkWords(){
+         for (var i=0; i < 10;i++){
+           var userInput = document.getElementById('word'+i).value;
+           var word = document.getElementById('hidden'+i).innerHTML;
+           document.getElementById('hidden'+i).style.display = 'inline'
+           var hiddenclass = document.getElementById('hidden'+i)
+           if (userInput===""){
+            hiddenclass.classList.add("alert-warning")
+           }
+           else if (word!==userInput) {
+            hiddenclass.classList.add("alert-danger")
+           }
+           else{
+            hiddenclass.classList.add("alert-success")
+           }
+         }
+       }
+    </script>
+    <script>
+      $('#replacewords').each(function() {
+        var text = $(this).text();
+        $(this).text(text.replaceWith('XXXX', '<div class="col-xs-2"><input class="form-control" id="ex1" type="text"></div>')); 
+    });
+
+
+    </script>
+   <script>
+      function copy() {
+        var VAL = $("#selection").select();
+        var DTA = $(this).text();
+        document.execCommand("copy");
+      
+    }
+    function cut() {
+      var VAL = $("#selection").select();
+      var DTA = $(this).text();
+      document.execCommand("copy");
+      document.execCommand("delete");
+  }
+  function cut() {
+    var VAL = $("#selection").select();
+    var DTA = $(this).text();
+    document.execCommand("copy");
+    document.execCommand("paste");
+}
+      $(document).ready(function() {
+        $("#word_count").on('keyup', function() {
+            var words = this.value.match(/\S+/g).length;
+            if (words > 300) {
+                // Split the string on first 200 words and rejoin on spaces
+                var trimmed = $(this).val().split(/\s+/, 300).join(" ");
+                // Add a space at the end to keep new typing making new words
+                $(this).val(trimmed + " ");
+            }
+            else {
+                $('#display_count').text(words);
+                
+            }
+        });
+     }); 
+   </script>
+    <script>
+        $(".clickable").click(function() {
+          
+          var $el = $(this);
+
+          console.log( $el.text() );
+
+          if ( $el.data('highlight') ) {
+            $el.css('background-color', "");
+            $el.data('highlight', false);
+          }
+          else {
+            $el.css('background-color', "yellow");
+            $el.data('highlight', true);
+          }
+
+          
+          /*      
+          selectedWord = this.id;
+          var currentColor=$("#"+selectedWord).css("background-color")
+          //alert(currentColor)
+          if (currentColor!=="rgb(255,255,0)"){
+            
+          $("#"+selectedWord).css("background-color", "yellow");
+          } else{
+            $("#"+selectedWord).css("background-color","");
+          }
+          */
+      });
+        
+      </script>
+      
+    <script> 
+        
+$(document).ready(function(){
+  
+  jQuery('.getvalue').on('click', function(e) {
+    $('#message').hide();
+    $('#answer').hide();
+    if ($('#answer').text()==$("input:radio[name=optradio]:checked").val()){
+      $('#answer').show();
+}else{
+  
+  $('#message').show().text($("input:radio[name=optradio]:checked").val());
+}
+  });
+});
+
+    </script>
+    <script>
+        (function($) {
+          var dragging, placeholders = $();
+          $.fn.sortable = function(options) {
+            var method = String(options);
+            options = $.extend({
+              connectWith: false
+            }, options);
+            return this.each(function() {
+              if (/^enable|disable|destroy$/.test(method)) {
+                var items = $(this).children($(this).data('items')).attr('draggable', method == 'enable');
+                if (method == 'destroy') {
+                  items.add(this).removeData('connectWith items')
+                    .off('dragstart.h5s dragend.h5s selectstart.h5s dragover.h5s dragenter.h5s drop.h5s');
+                }
+                return;
+              }
+              var isHandle, index, items = $(this).children(options.items);
+              var placeholder = $('<' + (/^ul|ol$/i.test(this.tagName) ? 'li' : 'div') + ' class="sortable-placeholder">');
+              items.find(options.handle).mousedown(function() {
+                isHandle = true;
+              }).mouseup(function() {
+                isHandle = false;
+              });
+              $(this).data('items', options.items)
+              placeholders = placeholders.add(placeholder);
+              if (options.connectWith) {
+                $(options.connectWith).add(this).data('connectWith', options.connectWith);
+              }
+              items.attr('draggable', 'true').on('dragstart.h5s', function(e) {
+                if (options.handle && !isHandle) {
+                  return false;
+                }
+                isHandle = false;
+                var dt = e.originalEvent.dataTransfer;
+                dt.effectAllowed = 'move';
+                dt.setData('Text', 'dummy');
+                index = (dragging = $(this)).addClass('sortable-dragging').index();
+              }).on('dragend.h5s', function() {
+                if (!dragging) {
+                  return;
+                }
+                dragging.removeClass('sortable-dragging').show();
+                placeholders.detach();
+                if (index != dragging.index()) {
+                  dragging.parent().trigger('sortupdate', {item: dragging});
+                }
+                dragging = null;
+              }).not('a[href], img').on('selectstart.h5s', function() {
+                this.dragDrop && this.dragDrop();
+                return false;
+              }).end().add([this, placeholder]).on('dragover.h5s dragenter.h5s drop.h5s', function(e) {
+                if (!items.is(dragging) && options.connectWith !== $(dragging).parent().data('connectWith')) {
+                  return true;
+                }
+                if (e.type == 'drop') {
+                  e.stopPropagation();
+                  placeholders.filter(':visible').after(dragging);
+                  dragging.trigger('dragend.h5s');
+                  return false;
+                }
+                e.preventDefault();
+                e.originalEvent.dataTransfer.dropEffect = 'move';
+                if (items.is(this)) {
+                  if (options.forcePlaceholderSize) {
+                    placeholder.height(dragging.outerHeight());
+                  }
+                  dragging.hide();
+                  $(this)[placeholder.index() < $(this).index() ? 'after' : 'before'](placeholder);
+                  placeholders.not(placeholder).detach();
+                } else if (!placeholders.is(this) && !$(this).children(options.items).length) {
+                  placeholders.detach();
+                  $(this).append(placeholder);
+                }
+                return false;
+              });
+            });
+          };
+          })(jQuery);
+          
+          
+          
+          
+          $(function() {
+                $('.sortable').sortable();
+                $('.handles').sortable({
+                  handle: 'span'
+                });
+                $('.connected').sortable({
+                  connectWith: '.connected'
+                });
+                $('.exclude').sortable({
+                  items: ':not(.disabled)'
+                });
+              });
+    </script>
+   
+  </body>
+
+</html>

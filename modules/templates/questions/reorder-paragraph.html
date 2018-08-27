@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	<div class="row">
+      <div class="col-sm-12 text-center"> 
+          <h4 class="card-title">Question</h4>
+          
+                 <p class="text-justify" ><strong> The text boxes in the left panel have been placed in a 
+                   random order. Restore the original order by dragging the text boxes from the left panel to the right panel. </strong></p>
+                </div>
+            
+             
+	 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+	    
+		  
+			<div id="connected col-sm-8">
+        <!--<h4 class="list-group-item-heading text-center">Unordered Options</h4> -->
+					<ul class="connected list">
+            
+            
+            {% for item in object_list %}
+           
+            <li>{{item.sentence_1}}</li>
+            <li>{{item.sentence_2}}</li>
+            <li>{{item.sentence_3}}</li>
+            <li>{{item.sentence_4}}</li>
+            {% if item.sentence_5 %}<li>{{item.sentence_5}}</li>{% endif %}
+
+            {% endfor %}
+					
+          </ul>
+          
+					<ul class="connected list no2">
+            <!--  <h4 class="list-group-item-heading text-center">Correct Answers</h4> -->
+              
+             
+					</ul>
+				</div>
+        <div class="text-center"><button type="button" class="btn btn-success">Check my Answers</button></div>
+		
+   </div>
+	</div>
+</div>
+
+        
+    {% if is_paginated %}
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class=" page-item disabled"><span class="page-link">&laquo;</span></li>
+      {% endif %}
+      {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+          <li class="page-item active "><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class=" page-item disabled"><span class="page-link">&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+
+</div>
+      {% endblock %}
+    
+
+
+

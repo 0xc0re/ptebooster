@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="container-fluid text-center">    
+        <div class="row content">
+          <div class="col-sm-2 sidenav">
+            
+          </div>
+          <div class="col-sm-8 text-center"> 
+              <h4 class="card-title">Question</h4>
+              <p class="text-justify"><strong> You will hear a lecture. After listening to the lecture, in 10 seconds, please speak into the microphone and retell what you have 
+                  have just heard from the lecture in your own words. You will have 40 seconds to give your response.
+              </strong></p>
+              <table class="table table-hover">
+                 
+                  <tbody>
+                      {% for paragraph in object_list %}
+                    <tr>
+                      
+                      <td><audio controls controlsList="nodownload"><source src="{{ paragraph.audio.url }}" type="audio/mpeg"></audio></td>
+                      <td><input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"></td>
+                      <td>
+                         
+                                    <div class="col-xs-4 text-center">
+        
+                                            <div class="col-xs-2" style="background-color: #eee;">
+                                                
+                                                <p> Current Status :</p>
+                                                <p> Playing in 5 seconds</p>
+                                                    <!--<progress value="0" max="10" id="progressBar"></progress> -->
+                                                    <div class="progress">
+                                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                                                          </div>
+                                            </div>
+                                    </div>
+                           
+                          
+                        </td>
+                    </tr>
+                    <tr>
+                        <img src="{{ paragraph.image.url }}" class="rounded mx-auto d-block " style="max-width:700px;max-height:500px;"  alt="...">
+                      </tr>
+                        {% endfor %}
+                    <tr>
+                     
+                        <th scope="col text-right"></th>
+                        <th scope="col"></th>
+                        <th scope="col"><button type="button" class="btn btn-success spellCheck">Check my Answers</button></th>
+                      </tr>
+                  </tbody>
+                  
+
+                </table>
+                
+          
+          
+      
+          
+      
+          </div>
+          <div class="col-sm-2 sidenav">
+          
+        
+            </div>
+          </div>
+        </div>
+      </div>
+        
+    {% if is_paginated %}
+    <ul class="pagination justify-content-center">
+      {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+      {% else %}
+        <li class=" page-item disabled"><span class="page-link">&laquo;</span></li>
+      {% endif %}
+      {% for i in paginator.page_range %}
+        {% if page_obj.number == i %}
+          <li class="page-item active "><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+      {% else %}
+        <li class=" page-item disabled"><span class="page-link">&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+
+</div>
+      {% endblock %}
+    
+
+
+
