@@ -1,11 +1,15 @@
 from django.db import models
 
-class Module(models.Model):
+class StatusAbstract(models.Model):
+    active = models.BooleanField(default=False)
+    free = models.BooleanField(default=True)
+    class Meta:
+        abstract = True
+class Module(StatusAbstract):
     module_name = models.CharField(max_length=80)
     question_class = models.CharField(max_length=80, blank=True)
     module_image=models.ImageField(upload_to='ptebooster/media/images',default='ptebooster/media/images/module_default.png')
-    slug = models.SlugField(max_length=80, unique=True)
-    active = models.BooleanField(default=True)
+    slug = models.SlugField(max_length=80, unique=True) 
     description = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     class Meta:
@@ -15,13 +19,14 @@ class Module(models.Model):
         return self.module_name
 
 
-class Images(models.Model):
+
+class Images(StatusAbstract):
     image_question=models.ImageField(upload_to='ptebooster/media/images',verbose_name='Image')
 
     class Meta:
         ordering = ['-id']
 
-class Spelling(models.Model):
+class Spelling(StatusAbstract):
     word = models.CharField(max_length=100, blank=False)
     audio = models.FileField(upload_to='ptebooster/media/spelling-audio')
 
@@ -29,26 +34,26 @@ class Spelling(models.Model):
     ('L','Listening'),
     ('S','Speaking'),
 ]"""
-class RepeatSentence(models.Model):
+class RepeatSentence(StatusAbstract):
     sentence_example = models.CharField(max_length=300, blank=False)
     audio = models.FileField(upload_to='ptebooster/media/sentences')
     #main_section = models.CharField(max_length=100, choices=SENTENCE_CHOICES, default='S')
 
-class Dictation(models.Model):
+class Dictation(StatusAbstract):   
     sentence_example = models.CharField(max_length=300, blank=False)
     audio = models.FileField(upload_to='ptebooster/media/dictation')
 
-class AcademicVocabulary(models.Model):
+class AcademicVocabulary(StatusAbstract):
     word = models.CharField(max_length=150, blank=False)
     academic_in_sentence = models.CharField(max_length=300, blank=False)
 
-class HighlightWords(models.Model):
+class HighlightWords(StatusAbstract):
     paragraph = models.TextField(max_length=800,blank=False)
     audio = models.FileField(upload_to='ptebooster/media/highlight-incorrect-words')
     answers = models.CharField(max_length=300, blank=False)
     correct_words = models.CharField(max_length=300, blank=True)
 
-class AbstractChoices(models.Model):
+class AbstractChoices(StatusAbstract):
     option_1 = models.TextField(max_length=500, blank=False)
     option_2 = models.TextField(max_length=500, blank=False)
     option_3 = models.TextField(max_length=500, blank=False)
@@ -68,25 +73,25 @@ class HighlightCorrectSummary(AbstractChoices):
     audio = models.FileField(upload_to='ptebooster/media/highlight-correct-summary')
     
 
-class  ReadTAloud(models.Model):
+class  ReadTAloud(StatusAbstract):
     paragraph = models.TextField(max_length=1000,blank=False)
     audio = models.FileField(upload_to='ptebooster/media/read-aloud',blank=True)
     
-class RetellLecture(models.Model):
+class RetellLecture(StatusAbstract):
     lecture = models.TextField(max_length=1000,blank=True)
     audio = models.FileField(upload_to='ptebooster/media/retell-lecture',blank=True)
     video = models.FileField(upload_to='ptebooster/media/retell-lecture',blank=True)
     image = models.FileField(upload_to='ptebooster/media/retell-lecture',blank=True)
 
-class Essay(models.Model):
+class Essay(StatusAbstract):
     topic = models.TextField(max_length=1000,blank=False)
     
-class FillInBlanks(models.Model):
+class FillInBlanks(StatusAbstract):
     paragraph = models.TextField(max_length=1000,blank=False)
     audio = models.FileField(upload_to='ptebooster/media/fill-in-blanks',blank=False)
     answers = models.CharField(max_length=300,blank=False)
 
-class AnswerShortQuestions(models.Model):
+class AnswerShortQuestions(StatusAbstract):
     audio = models.FileField(upload_to='ptebooster/media/answer-short-question',blank=False)
     answer = models.CharField(max_length=90,blank=False)
 
@@ -94,7 +99,7 @@ class ReorderParagraph(AbstractChoices):
     option_5 = models.CharField(max_length=150,blank=False)
     
 
-class AbstractSelection(models.Model):
+class AbstractSelection(StatusAbstract):
     paragraph = models.TextField(max_length=600,blank=True)
     option_1 = models.CharField(max_length=150,blank=False)
     option_2 = models.CharField(max_length=150,blank=False)
@@ -118,12 +123,12 @@ class MultipleSelectionReading(AbstractSelection):
 class FillBlanksReading(AbstractSelection):
     paragraph = models.TextField(max_length=1000,blank=False)
 
-class SummarizeSpokenText(models.Model):
+class SummarizeSpokenText(StatusAbstract):
     paragraph = models.TextField(max_length=1000,blank=False)
     audio = models.FileField(upload_to='ptebooster/media/summarize-spoken-text',blank=False)
     model_answer = models.TextField(max_length=1000,blank=True)
 
 
-class SummarizeWrittenText(models.Model):
+class SummarizeWrittenText(StatusAbstract):
     paragraph = models.TextField(max_length=1000,blank=False)
     model_answer = models.TextField(max_length=1000,blank=True)

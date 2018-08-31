@@ -6,38 +6,46 @@ SelectMissingWord, HighlightCorrectSummary, ReadTAloud, RetellLecture, Essay,\
 FillInBlanks, AnswerShortQuestions, ReorderParagraph, MultipleSelection, MultipleSelectionReading,\
 FillBlanksReading, SummarizeSpokenText,SummarizeWrittenText
 
+class AbstractListView(ListView):
+    
+    def get_queryset(self):    
+        qs = super().get_queryset() 
+        queryset = qs.filter(active=True,free=True)
+        return queryset
+    class Meta:
+        abstract = True
 
-
-class ModuleListView(ListView):
+class ModuleListView(AbstractListView):
     model = Module
     template_name='modules\home.html'
+    
 
-class ImagesListView(ListView):
+class ImagesListView(AbstractListView):
     model = Images
     template_name = 'questions\describe-image.html'
     paginate_by = 1
 
-class SpellingListView(ListView):
+class SpellingListView(AbstractListView):
     model = Spelling
     template_name = 'questions\spelling.html'
     paginate_by = 10
 
-class RepeatListView(ListView):
+class RepeatListView(AbstractListView):
     model = RepeatSentence
     template_name = 'questions\\repeat-sentence.html'
     paginate_by = 10
 
-class AcademicVocabularyListView(ListView):
+class AcademicVocabularyListView(AbstractListView):
     model = AcademicVocabulary
     template_name = 'questions\\academic-vocabulary.html'
     paginate_by = 10
 
-class DictationListView(ListView):
+class DictationListView(AbstractListView):
     model = Dictation
     template_name = 'questions\write-from-dictation.html'
     paginate_by = 2
 
-class HighlightListView(ListView):
+class HighlightListView(AbstractListView):
     model = HighlightWords
     template_name = 'questions\highlight-incorrect-words.html'
     paginate_by = 1
@@ -47,32 +55,32 @@ class HighlightListView(ListView):
                 paragraph = item.paragraph
                 item.paragraph = paragraph.split()
             return queryset
-class SelectMissingWordView(ListView):
+class SelectMissingWordView(AbstractListView):
     model = SelectMissingWord
     template_name = 'questions\select-missing-word.html'
     paginate_by = 1
 
-class HighlightCorrectSummaryView(ListView):
+class HighlightCorrectSummaryView(AbstractListView):
     model = HighlightCorrectSummary
     template_name = 'questions\highlight-correct-summary.html'
     paginate_by = 1
 
-class ReadAloudView(ListView):
+class ReadAloudView(AbstractListView):
     model = ReadTAloud
     template_name = 'questions\\read-aloud.html'
     paginate_by = 1
 
-class RetellLectureView(ListView):
+class RetellLectureView(AbstractListView):
     model = RetellLecture
     template_name = 'questions\\retell-lecture.html'
     paginate_by = 1
 
-class EssayView(ListView):
+class EssayView(AbstractListView):
     model = Essay
     template_name = 'questions\write-essay.html'
     paginate_by = 1
 
-class FillInBlanksView(ListView):
+class FillInBlanksView(AbstractListView):
     model = FillInBlanks
     template_name = 'questions\\fill-in-blanks.html'
     paginate_by = 1
@@ -86,27 +94,27 @@ class FillInBlanksView(ListView):
             paragraph = regex_words.sub('XXXX',item.paragraph)
             item.paragraph = paragraph.split()
         return queryset
-class AnswerShortQuestionsView(ListView):
+class AnswerShortQuestionsView(AbstractListView):
     model = AnswerShortQuestions
     template_name = 'questions\spelling.html'
     paginate_by = 10
 
-class ReorderParagraphView(ListView):
+class ReorderParagraphView(AbstractListView):
     model = ReorderParagraph
     template_name = 'questions\\reorder-paragraph.html'
     paginate_by = 1
    
-class MultipleSelectionView(ListView):
+class MultipleSelectionView(AbstractListView):
     model = MultipleSelection
     template_name = 'questions\multiple-selection.html'
     paginate_by = 1
 
-class MultipleSelectionReadingView(ListView):
+class MultipleSelectionReadingView(AbstractListView):
     model = MultipleSelectionReading
     template_name = 'questions\multiple-selection.html'
     paginate_by = 1
 
-class FillBlanksReadingView(ListView):
+class FillBlanksReadingView(AbstractListView):
     model = FillBlanksReading
     template_name = 'questions\\fill-blanks-reading.html'
     paginate_by = 1
@@ -128,12 +136,12 @@ class FillBlanksReadingView(ListView):
             item.paragraph = pr  
         return queryset
 
-class SummarizeSpokenTextView(ListView):
+class SummarizeSpokenTextView(AbstractListView):
     model = SummarizeSpokenText
     template_name = 'questions\summarize-spoken-text.html'
     paginate_by = 1
 
-class SummarizeWrittenTextView(ListView):
+class SummarizeWrittenTextView(AbstractListView):
     model = SummarizeWrittenText
     template_name = 'questions\summarize-written-text.html'
     paginate_by = 1
