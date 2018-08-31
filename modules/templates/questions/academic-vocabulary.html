@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-
+<br>
+<br>
+<br>
 <div class="container">
     <div class="container-fluid text-center">    
         <div class="row content">
-          <div class="col-sm-2 sidenav">
-            
-          </div>
-          <div class="col-sm-8 text-center"> 
-              <h4 class="card-title">Question</h4>
+        
+          <div class="col-sm-12 text-center"> 
+              <h4 class="card-title">List of Academic words with Examples</h4>
               
-              <table class="table table-hover">
+              <table class="table table-striped text-left">
                   <thead>
                     <tr>
                      
@@ -29,12 +29,7 @@
                       <td><h4 class="card-title"></h4></td>
                     </tr>
                     {% endfor %}
-                    <tr>
-                     
-                        <th scope="col text-right"></th>
-                        <th scope="col"></th>
-                        
-                      </tr>
+                    
                   </tbody>
                   
 
@@ -46,36 +41,14 @@
           
       
           </div>
-          <div class="col-sm-2 sidenav">
           
-        
-            </div>
           </div>
         </div>
       </div>
         
-    {% if is_paginated %}
-    <ul class="pagination justify-content-center">
-      {% if page_obj.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-      {% else %}
-        <li class=" page-item disabled"><span class="page-link">&laquo;</span></li>
-      {% endif %}
-      {% for i in paginator.page_range %}
-        {% if page_obj.number == i %}
-          <li class="page-item active "><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
-        {% else %}
-          <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-        {% endif %}
-      {% endfor %}
-      {% if page_obj.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-      {% else %}
-        <li class=" page-item disabled"><span class="page-link">&raquo;</span></li>
-      {% endif %}
-    </ul>
-  {% endif %}
-
+      {% block pagination %}
+      {% include "pagination.html" %}
+      {% endblock %}
 
 </div>
       {% endblock %}

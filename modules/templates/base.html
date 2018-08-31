@@ -25,7 +25,8 @@
   <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #062F4F;">
       <div class="container">
         <a class="navbar-brand" href="/modules/">PTE Booster</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +52,7 @@
         </div>
       </div>
     </nav>
-
+  </div>
     <!-- Page Content -->
    {% block content %}
 
@@ -59,28 +60,42 @@
     <!-- /.container -->
 
     <!-- Footer -->
+    <div class="container">
     <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
       </div>
       <!-- /.container -->
     </footer>
-
+  </div>
     <!-- Bootstrap core JavaScript -->
     
     <script src="{% static "vendor/jquery/jquery.min.js" %}" ></script>
     <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
     <script>
+        var timeleft = 8;
+        var downloadTimer = setInterval(function(){
+          document.getElementById("progressBar").value = 8 - --timeleft;
+          document.getElementById("countdowntimer").textContent = timeleft;
+          if(timeleft <= 0)
+            clearInterval(downloadTimer);
+        },1000);
+        document.getElementById("audioContent").autoplay;
+    </script>
+    <script>
        function checkWords(){
+         
          for (var i=0; i < 10;i++){
            var userInput = document.getElementById('word'+i).value;
            var word = document.getElementById('hidden'+i).innerHTML;
+           
            document.getElementById('hidden'+i).style.display = 'inline'
            var hiddenclass = document.getElementById('hidden'+i)
            if (userInput===""){
             hiddenclass.classList.add("alert-warning")
            }
            else if (word!==userInput) {
+            alert(userInput,word);
             hiddenclass.classList.add("alert-danger")
            }
            else{
@@ -137,7 +152,7 @@
           
           var $el = $(this);
 
-          console.log( $el.text() );
+          
 
           if ( $el.data('highlight') ) {
             $el.css('background-color', "");

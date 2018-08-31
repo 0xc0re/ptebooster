@@ -3,7 +3,8 @@ from modules.views import ModuleListView,ImagesListView,SpellingListView, \
 Template404View, RepeatListView, AcademicVocabularyListView, DictationListView, \
 HighlightListView, SelectMissingWordView, HighlightCorrectSummaryView, ReadAloudView, \
 RetellLectureView, EssayView, FillInBlanksView, AnswerShortQuestionsView, ReorderParagraphView, \
-MultipleSelectionView, MultipleSelectionReadingView, FillBlanksReadingView, SummarizeSpokenTextView
+MultipleSelectionView, MultipleSelectionReadingView, FillBlanksReadingView, SummarizeSpokenTextView,\
+SummarizeWrittenTextView
 
 urlpatterns = [
     path('', ModuleListView.as_view()),
@@ -25,5 +26,6 @@ urlpatterns = [
     path('multiple-selection-reading/',MultipleSelectionReadingView.as_view()),
     path('fill-blanks-reading/',FillBlanksReadingView.as_view()),
     path('summarize-spoken-text/',SummarizeSpokenTextView.as_view()),
+    path('summarize-written-text/',SummarizeWrittenTextView.as_view()),
     re_path('^$',Template404View.as_view()),
 ]

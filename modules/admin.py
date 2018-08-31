@@ -3,7 +3,7 @@ from .models import Module, Images, Spelling, \
 RepeatSentence, AcademicVocabulary, Dictation, HighlightWords,FillInBlanks, \
 SelectMissingWord, HighlightCorrectSummary, ReadTAloud, RetellLecture, Essay, \
 AnswerShortQuestions, ReorderParagraph, MultipleSelection, MultipleSelectionReading, \
-FillBlanksReading, SummarizeSpokenText
+FillBlanksReading, SummarizeSpokenText, SummarizeWrittenText
 
 @admin.register(Module)
 class ModuleAdmin(admin.ModelAdmin):
@@ -65,7 +65,7 @@ class FillinBlanksAdmin(admin.ModelAdmin):
 
 @admin.register(ReorderParagraph)
 class ReorderParagraphAdmin(admin.ModelAdmin):
-    list_display = ['sentence_1','sentence_2','sentence_3','sentence_4','sentence_5','answer']
+    list_display = ['option_1','option_2','option_3','option_4','option_5','answer']
 
 @admin.register(MultipleSelection)
 class MultipleSelectionAdmin(admin.ModelAdmin):
@@ -79,6 +79,6 @@ class MultipleSelectionReadingAdmin(admin.ModelAdmin):
 class FillBlanksReadingAdmin(admin.ModelAdmin):
     list_display = ['paragraph','option_1','option_2','option_3','option_4','option_5','option_6','answers']
 
-@admin.register(SummarizeSpokenText)
-class SummarizeSpokenTextAdmin(admin.ModelAdmin):
-    list_display = ['paragraph','audio','model_answer']
+@admin.register(SummarizeWrittenText)
+class SummarizeWrittenTextAdmin(admin.ModelAdmin):
+    list_display = ['paragraph','model_answer']

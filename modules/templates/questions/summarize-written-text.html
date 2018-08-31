@@ -4,62 +4,59 @@
 <div class="container">
     <div class="container-fluid text-center">    
         <div class="row content">
-          <div class="col-sm-2 sidenav">
+                <div class="col-sm-2 sidenav">
             
-          </div>
+                    </div>
           <div class="col-sm-8 text-center"> 
               <h4 class="card-title">Question</h4>
-              <p class="text-justify" ><strong> You will have 20 minutes to plan, write and revise an essay about the topic below. Your response will be judged on how well you develop a position, organize your ideas, present supporting details,
-                 and control the elements of standard written English. You should write 200-300 words.</strong></p>
+              
               <table class="table table-hover">
                   <thead>
-                        {% for object in object_list %}
                     <tr>
                      
-                            <p class="text-justify"> {{ object.topic}}</p>
+                            <p class="text-justify"><strong>You will hear a short lecture. Write a summary for a fellow student who was not present at the lecture. You should write 50-70 words. You have 10 minutes to finish this task. Your response will be judged on the Quality of Your writing and on how well 
+                                    your response presents the key points presented in the lecture.</strong></p>
+                      
                     </tr>
                   </thead>
                   <tbody>
-                      
+                      {% for word in object_list %}
+                      <tr><p class="text-justify"> {{word.paragraph}}</p></tr>
                     <tr>
                       
                     
-                      <td>
-                        
+                     
+                      <td><h4 class="card-title"></h4></td>
+                    </tr>
+                    <tr>
+                            <td>
                             <textarea id="word_count" style="width:700px; height:200px" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea> <br>
                             Total word count: <span id="display_count">0</span> words
                             <button onclick="cut()">Cut</button>
                             <button onclick="copy()">Copy</button>
                             <button onclick="paste()">Paste</button>
-                            
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     {% endfor %}
                     <tr>
                      
                         <th scope="col text-right"></th>
                         <th scope="col"></th>
-                        <th scope="col"><button type="button" class="btn btn-success spellCheck">Check my Answers</button></th>
+                        <th scope="col"><button type="button" class="btn btn-success">Check my Answers</button></th>
                       </tr>
                   </tbody>
-                  
-
                 </table>
+
+                </div>
+                <div class="col-sm-2 sidenav">
                 
-          
-          
-      
-          
-      
-          </div>
-          <div class="col-sm-2 sidenav">
-          
-        
-            </div>
+              
+                  </div>
+                </div>
           </div>
         </div>
       </div>
-        
+      
       {% block pagination %}
       {% include "pagination.html" %}
       {% endblock %}
@@ -68,6 +65,7 @@
 </div>
       {% endblock %}
     
+
 
 
 

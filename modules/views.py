@@ -4,7 +4,7 @@ from modules.models import Module, Images, Spelling, \
 RepeatSentence, AcademicVocabulary, Dictation, HighlightWords, \
 SelectMissingWord, HighlightCorrectSummary, ReadTAloud, RetellLecture, Essay,\
 FillInBlanks, AnswerShortQuestions, ReorderParagraph, MultipleSelection, MultipleSelectionReading,\
-FillBlanksReading, SummarizeSpokenText
+FillBlanksReading, SummarizeSpokenText,SummarizeWrittenText
 
 
 
@@ -35,7 +35,7 @@ class AcademicVocabularyListView(ListView):
 class DictationListView(ListView):
     model = Dictation
     template_name = 'questions\write-from-dictation.html'
-    paginate_by = 10
+    paginate_by = 2
 
 class HighlightListView(ListView):
     model = HighlightWords
@@ -131,6 +131,11 @@ class FillBlanksReadingView(ListView):
 class SummarizeSpokenTextView(ListView):
     model = SummarizeSpokenText
     template_name = 'questions\summarize-spoken-text.html'
+    paginate_by = 1
+
+class SummarizeWrittenTextView(ListView):
+    model = SummarizeWrittenText
+    template_name = 'questions\summarize-written-text.html'
     paginate_by = 1
 
 # this is not working tke care of it later not urgent
