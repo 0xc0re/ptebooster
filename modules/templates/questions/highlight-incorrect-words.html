@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% load custom_tags %}
+
 {% block content %}
 
 <div class="container">
@@ -22,23 +25,32 @@
 
                    
                       <tr>
+                        
                           {% block timer %}
                           {% include "timer.html" %}
                           {% endblock %}
                       </tr>
                       {% for sentence in object_list %}
+   
                       <tr><audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 8000)" id="audioContent" controls="false" controlsList="nodownload"  controls controlsList="nodownload"><source src="{{ sentence.audio.url }}" type="audio/mpeg"></audio></tr>
                     <tr>
                        
                             <p id='clikable' class="text-justify">
-                              {% for item in sentence.paragraph %}<span class='clickable default' id='{{item}}-{{forloop.counter}}'>{{item}} </span>{% endfor %}</p>
-                      
+
+                              {% for item in sentence.paragraph %}
+                              
+                              {% if not item|strip in sentence.answers %}
+                              <span  class='clickable default' id='{{item}}-{{forloop.counter}}'>{{item}} </span>
+                              {% else %}
+                              <span  class='clickable default crr' id='{{item}}-{{forloop.counter}}'>{{item}} </span>
+                              {% endif %}
+                              {% endfor %}</p>
                     </tr>
                     {% endfor %}
                     <tr>
                      
                         
-                        <th scope="col" class="text-right"><button type="button" class="btn btn-success">Check my Answers</button></th>
+                        <th scope="col" class="text-right checkhighlight"><button type="button" class="btn btn-success">Check my Answers</button></th>
                       </tr>
                   </tbody>
                   

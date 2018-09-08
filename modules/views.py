@@ -18,6 +18,7 @@ class AbstractListView(ListView):
 class ModuleListView(AbstractListView):
     model = Module
     template_name='modules\home.html'
+    #paginate_by = 8
     
 
 class ImagesListView(AbstractListView):
@@ -54,6 +55,9 @@ class HighlightListView(AbstractListView):
             for item in queryset:
                 paragraph = item.paragraph
                 item.paragraph = paragraph.split()
+                answers = item.answers
+                item.answers = [ i.strip() for i in answers.split(',')]
+                print(item.answers )
             return queryset
 class SelectMissingWordView(AbstractListView):
     model = SelectMissingWord
@@ -93,6 +97,8 @@ class FillInBlanksView(AbstractListView):
             regex_words = re.compile('|'.join(map(re.escape,answer_list)))
             paragraph = regex_words.sub('XXXX',item.paragraph)
             item.paragraph = paragraph.split()
+            item.answers = answer_list
+            
         return queryset
 class AnswerShortQuestionsView(AbstractListView):
     model = AnswerShortQuestions

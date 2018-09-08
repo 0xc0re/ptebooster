@@ -20,23 +20,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                        {% if object.audio %}
-                   
-                      <tr>
-                            
-                          {% block timer %}
-                          {% include "timer.html" %}
-                          {% endblock %}
-                         
-                      </tr>
-                      
-                      <tr><audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 8000)" id="audioContent" controls="false" controlsList="nodownload" ><source src="{{ object.audio.url }}" type="audio/mpeg"></audio></tr>{% endif %}
+                    {% for item in object.answers %}
+                    <input class="lanswer" style="display:none" value="{{item}}">
+                    {% endfor %}
                     <tr><p id="replacewords" class="text-justify"> 
                         {% for word in object.paragraph %}
                         {% if word|lower in object.answers %}
-                        <select name="answer" class=" intro-lead-in" data-step='2'>
+                        <select id="introleadin" name="answer" class="introleadin" data-step='2'>
                         
-                            <option value=""> </option>
+                            <option value="-----"> </option>
                             {% if word|lower in object.option_1 %}{% for option in object.option_1 %}<option value="{{option}}">{{option}}</option>{% endfor %}
                             {% elif word|lower in object.option_2 %}{% for option in object.option_2 %}<option value="{{option}}">{{option}}</option>{% endfor %}
                             {% elif word|lower in object.option_3 %}{% for option in object.option_3 %}<option value="{{option}}">{{option}}</option>{% endfor %}
@@ -51,12 +43,23 @@
 
                         {% endfor %}
                     </p></tr>
-                    
+                    <tr class="answerlist" style="display:none">
+                      <td>
+                        <div class="well answerlist" >
+                        {% for answer in object.answers %}
+                        <label type="text" class="btn btn-info">{{answer}}</label>
+                        
+                       
+                       {% endfor %}
+                       </div>
+                      </td>
+                      </tr>
+                  <tr>
                     {% endfor %}
                     <tr>
                      
                         
-                        <th scope="col" class="text-right"><button type="button" class="btn btn-success getvalue">Check my Answers</button></th>
+                        <th scope="col" class="text-right"><button type="button" class="btn btn-success fillReading">Check my Answers</button></th>
                       </tr>
                       <tr>
                          
@@ -74,16 +77,7 @@
           </div>
         </div>
       </div>
-      <script>
-          var timeleft = 8;
-          var downloadTimer = setInterval(function(){
-            document.getElementById("progressBar").value = 8 - --timeleft;
-            document.getElementById("countdowntimer").textContent = timeleft;
-            if(timeleft <= 0)
-              clearInterval(downloadTimer);
-          },1000);
-          document.getElementById("audioContent").autoplay;
-      </script>
+      
       {% block pagination %}
       {% include "pagination.html" %}
       {% endblock %}

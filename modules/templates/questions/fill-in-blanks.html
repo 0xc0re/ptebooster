@@ -23,6 +23,7 @@
 
                    
                       <tr>
+                          
                           {% block timer %}
                           {% include "timer.html" %}
                           {% endblock %}
@@ -32,16 +33,28 @@
                       {% if object.audio %}<tr><audio onloadeddata="var audioPlayer = this; setTimeout(function() { audioPlayer.play(); }, 8000)" id="audioContent" controls="false" controlsList="nodownload" ><source src="{{ object.audio.url }}" type="audio/mpeg"></audio></tr>{% endif %}
                     <tr><p id="replacewords" class="text-justify"> 
                         {% for word in object.paragraph %}
-                        {% ifequal word "XXXX" %}<input size="10" name="answer"  data-step='3'  data-intro='You have to click on each gap using left-mouse button and type in the missing word.'  spellcheck="false" value="" type="text"> {% else %}{{ word }}{% endifequal %}
+                        {% ifequal word "XXXX" %}<input size="10" name="answer"  class="userData" data-step='3'   spellcheck="false" value="" type="text"> {% else %}{{ word }}{% endifequal %}
 
                         {% endfor %}
                     </p></tr>
-                    
+                    {% for item in object.answers %}
+                    <input class="lanswer" style="display:none" value="{{item}}">
                     {% endfor %}
+                    <tr class="answerlist" style="display:none">
+                        <td>
+                          <div class="well answerlist" >
+                          {% for answer in object.answers %}
+                          <label type="text" class="btn btn-info">{{answer}}</label>
+                          
+                         
+                         {% endfor %}
+                         </div>
+                        </td>
+                        </tr>
                     <tr>
                      
-                        
-                        <th scope="col" class="text-right"><button type="button" class="btn btn-success getvalue">Check my Answers</button></th>
+                        {% endfor %}
+                        <th scope="col" class="text-right"><button type="button" class="btn btn-success checkButton">Check my Answers</button></th>
                       </tr>
                       <tr>
                          

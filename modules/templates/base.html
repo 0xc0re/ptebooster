@@ -147,6 +147,98 @@
         });
      }); 
    </script>
+   <!-- Fill in the blanks listening starts -->
+   <script>
+      $(".checkButton").click(function(){
+        var answers = new Array();
+        $(".answerlist").show();
+        $(".lanswer").each(function(){
+          
+          answers.push($(this).val().trim());
+        })
+        console.log(answers);
+       $(".userData").each(function(){
+          console.log($(this).val().trim())
+          if (jQuery.inArray($(this).val().trim(),answers)>-1){
+      
+            $(this).addClass('alert-success');
+          }else{
+            $(this).addClass('alert-danger');;
+          }
+         
+      }) 
+      
+      
+      });
+     
+    </script>
+     <!-- Fill in the blanks listening ends -->
+    <!-- Fill in the blanks reading starts -->
+    <script>
+      $(".fillReading").click(function(){
+        var answers = new Array();
+        $(".lanswer").each(function(){
+          
+          answers.push($(this).val().trim());
+        })
+        console.log(answers);
+        
+        $(".introleadin").each(function(){
+          var a = $(this).find("option:selected").text();
+         
+          if (jQuery.inArray(a,answers) == -1){
+      
+          
+            $(this).addClass('border border-danger');
+          }else{
+            $(this).addClass('border border-success');
+          }
+        });
+        $('.answerlist').show();
+      });
+      </script>
+    <!-- Fill in the blanks ends-->
+    <!-- Listening mutiple selection start-->
+    <script>
+    $(".multipleCheck").click(function(){
+      var answers= new Array;
+      answers = $(".answers").val().split(',');
+      
+      $("input:checked").each(function(){
+        var p = $(this).css('background-color');
+        
+        if (jQuery.inArray($(this).val(),answers) == -1){
+      
+          
+          $('.answers').addClass('alert-danger');
+        }else{
+          $('.answers').addClass('alert-success');
+        }
+      });
+      $('.answers').show();
+    });
+    </script>
+    <!-- Listening mutiple selection ends-->
+   <!--highligh incorrect words section start-->
+   <script>
+      $(".checkhighlight").click(function() {
+        
+        $(".clickable").each(function(){
+          if ($(this).hasClass('crr')){
+            $(this).css('background-color',"rgb(51, 153, 0)");
+
+          }else{
+           
+            if($(this).css('background-color') == 'rgb(255, 255, 0)'){
+              $(this).css('background-color',"rgb(204, 51, 0)");
+            }
+          }
+          $(this).off('click');
+        });
+
+      });
+      
+    </script>
     <script>
         $(".clickable").click(function() {
           
@@ -164,21 +256,13 @@
           }
 
           
-          /*      
-          selectedWord = this.id;
-          var currentColor=$("#"+selectedWord).css("background-color")
-          //alert(currentColor)
-          if (currentColor!=="rgb(255,255,0)"){
-            
-          $("#"+selectedWord).css("background-color", "yellow");
-          } else{
-            $("#"+selectedWord).css("background-color","");
-          }
-          */
+        
       });
         
       </script>
-      
+
+   <!--highligh incorrect words section end-->   
+
     <script> 
         
 $(document).ready(function(){
