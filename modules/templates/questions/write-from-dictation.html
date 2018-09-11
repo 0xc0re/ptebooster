@@ -19,38 +19,25 @@
                     </tr>
                   </thead>
                   <tbody>
-                      {% for word in object_list %}
+                      {% for object in object_list %}
                     <tr>
                       
-                      <td><audio controls controlsList="nodownload"><source src="{{ word.audio.url }}" type="audio/mpeg"></audio></td>
-                      <td ><input id="word{{ forloop.counter0 }}" size="35" type="text" class="foo form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"></td>
+                      <td><audio controls controlsList="nodownload"><source src="{{ object.audio.url }}" type="audio/mpeg"></audio></td>
+                      <td ><input id="object{{ forloop.counter0 }}" size="35" type="text" class="foo form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"></td>
                       
                     </tr>
                     <tr>
                       <td class="text-right" colspan="12">
-                     <div class="demo-container text-right alert col-sm-12" id="hidden{{ forloop.counter0 }}" style="display:none;">{{word.sentence_example}} </div>
+                     <div class="demo-container text-right alert col-sm-12" id="hidden{{ forloop.counter0 }}" style="display:none;">{{object.item}} </div>
                     </td>
                     {% endfor %}
                     <tr>
                       <td></td>
                         <td class="text-right">
-                        <button type="button" class="btn btn-success"  onclick="checkSentences()">Check my Answers</button></td>
+                        <button type="button" class="btn btn-success"  onclick="checkWords()">Check my Answers</button></td>
                       </tr>
                   </tbody>
-                  <script>
-                    function checkSentences(){
-                      var InputId = $("#word0").val();
-                      var Answer = $( "div.demo-container" ).text();
-                      if(InputId.is(Answer)){
-                        
-                      }else{
-                        $( "div.demo-container" ).show();
-                      }
-                      
-                      
                   
-                }
-                </script>
                 </table>
                 
           

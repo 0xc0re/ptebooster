@@ -27,7 +27,7 @@ class Images(StatusAbstract):
         ordering = ['-id']
 
 class Spelling(StatusAbstract):
-    word = models.CharField(max_length=100, blank=False)
+    item = models.CharField(max_length=100, blank=False)
     audio = models.FileField(upload_to='ptebooster/media/spelling-audio')
 
 """SENTENCE_CHOICES=[
@@ -35,12 +35,12 @@ class Spelling(StatusAbstract):
     ('S','Speaking'),
 ]"""
 class RepeatSentence(StatusAbstract):
-    sentence_example = models.CharField(max_length=300, blank=False)
+    item = models.CharField(max_length=300, blank=False)
     audio = models.FileField(upload_to='ptebooster/media/sentences')
     #main_section = models.CharField(max_length=100, choices=SENTENCE_CHOICES, default='S')
 
 class Dictation(StatusAbstract):   
-    sentence_example = models.CharField(max_length=300, blank=False)
+    item = models.CharField(max_length=300, blank=False)
     audio = models.FileField(upload_to='ptebooster/media/dictation')
 
 class AcademicVocabulary(StatusAbstract):
@@ -93,7 +93,7 @@ class FillInBlanks(StatusAbstract):
 
 class AnswerShortQuestions(StatusAbstract):
     audio = models.FileField(upload_to='ptebooster/media/answer-short-question',blank=False)
-    answer = models.CharField(max_length=90,blank=False)
+    item = models.CharField(max_length=90,blank=False)
 
 class ReorderParagraph(AbstractChoices):
     option_5 = models.CharField(max_length=150,blank=False)

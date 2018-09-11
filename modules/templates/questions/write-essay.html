@@ -16,17 +16,19 @@
                         {% for object in object_list %}
                     <tr>
                      
-                            <p class="text-justify"> {{ object.topic}}</p>
+                            <p c> {{ object.topic}}</p>
                     </tr>
                   </thead>
                   <tbody>
-                      
+                      <tr>
+                        <div float="right" class="text-center col-sm-2 border border-secondary"><span id="time">20:00</span></div>
+                      </tr>
                     <tr>
                       
                     
                       <td>
                         
-                            <textarea id="word_count" style="width:700px; height:200px" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea> <br>
+                            <textarea id="word_count" class="essayArea" style="width:700px; height:200px" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea> <br>
                             Total word count: <span id="display_count">0</span> words
                             <button onclick="cut()">Cut</button>
                             <button onclick="copy()">Copy</button>

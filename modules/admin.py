@@ -17,15 +17,15 @@ class ImagesAdmin(admin.ModelAdmin):
 
 @admin.register(Spelling)
 class SpellingAdmin(admin.ModelAdmin):
-    list_display = ['word','audio','active']
+    list_display = ['item','audio','active']
 
 @admin.register(RepeatSentence)
 class RepeatSentenceAdmin(admin.ModelAdmin):
-    list_display = ['sentence_example','audio','active'] #,'main_section'
+    list_display = ['item','audio','active'] #,'main_section'
 
 @admin.register(Dictation)
 class DictationAdmin(admin.ModelAdmin):
-    list_display = ['sentence_example','audio','active'] #,'main_section'
+    list_display = ['item','audio','active'] #,'main_section'
 
 @admin.register(AcademicVocabulary)
 class AcademicVocabularyAdmin(admin.ModelAdmin):
@@ -60,8 +60,8 @@ class FillinBlanksAdmin(admin.ModelAdmin):
     list_display = ['paragraph','audio','answers','active']
 
 @admin.register(AnswerShortQuestions)
-class FillinBlanksAdmin(admin.ModelAdmin):
-    list_display = ['audio','answer','active']
+class AnswerShortQuestions(admin.ModelAdmin):
+    list_display = ['audio','item','active']
 
 @admin.register(ReorderParagraph)
 class ReorderParagraphAdmin(admin.ModelAdmin):

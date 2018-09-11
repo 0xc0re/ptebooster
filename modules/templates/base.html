@@ -86,7 +86,7 @@
        function checkWords(){
          
          for (var i=0; i < 10;i++){
-           var userInput = document.getElementById('word'+i).value;
+           var userInput = document.getElementById('object'+i).value;
            var word = document.getElementById('hidden'+i).innerHTML;
            
            document.getElementById('hidden'+i).style.display = 'inline'
@@ -94,7 +94,7 @@
            if (userInput===""){
             hiddenclass.classList.add("alert-warning")
            }
-           else if (word!==userInput) {
+           else if ($.trim(word)!==$.trim(userInput)) {
             alert(userInput,word);
             hiddenclass.classList.add("alert-danger")
            }
@@ -170,8 +170,54 @@
       
       
       });
-     
+   
     </script>
+    <!-- spelling section starts-->
+    <script>
+      function checkSentences(){
+        var InputId = $("#object0").val();
+        var Answer = $( "div.demo-container" ).text();
+        if(InputId.is(Answer)){
+          
+        }else{
+          $( "div.demo-container" ).show();
+        }
+        
+        
+    
+  }
+  </script>
+  <!-- spelling section ends-->
+    <!--$(".essayArea").attr('readonly','readonly');-->
+     <script>
+        function startTimer(duration, display) {
+          var timer = duration, minutes, seconds;
+          setInterval(function () {
+              minutes = parseInt(timer / 60, 10)
+              seconds = parseInt(timer % 60, 10);
+      
+              minutes = minutes < 10 ? "0" + minutes : minutes;
+              seconds = seconds < 10 ? "0" + seconds : seconds;
+      
+              display.text(minutes + ":" + seconds);
+      
+              if (--timer < 0) {
+                  timer = duration;
+                  $(".essayArea").attr('readonly','readonly');
+              }
+             
+          }, 1000);
+      }
+      
+      jQuery(function ($) {
+        
+          var givenMinutes = 60 * 1,
+              display = $('#time');
+          startTimer(givenMinutes, display);
+      });
+       </script>
+    
+
      <!-- Fill in the blanks listening ends -->
     <!-- Fill in the blanks reading starts -->
     <script>

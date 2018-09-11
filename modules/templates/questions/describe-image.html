@@ -8,9 +8,9 @@
                 <div class="col-8">
                
     {% for image in object_list %}
-    
-    <img src="{{ image.image_question.url }}" class="rounded mx-auto d-block " style="max-width:700px;max-height:500px;"  alt="...">
-   
+    <div style="width:700px;height:500px">
+    <img src="{{ image.image_question.url }}" class="rounded mx-auto d-block " style="max-width:80%;max-height:100%;"  alt="...">
+    </div>
     {% endfor %}
 </div>
     <div class="col-4">

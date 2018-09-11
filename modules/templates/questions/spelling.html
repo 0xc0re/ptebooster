@@ -20,14 +20,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                      {% for word in object_list %}
+                      {% for object in object_list %}
                     <tr>
                       
-                      <td><audio controls controlsList="nodownload"><source src="{{ word.audio.url }}" type="audio/mpeg"></audio></td>
-                      <td class="col-md-5"><input id="word{{ forloop.counter0 }}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"></td>
+                      <td><audio controls controlsList="nodownload"><source src="{{ object.audio.url }}" type="audio/mpeg"></audio></td>
+                      <td class="col-md-5"><input id="object{{ forloop.counter0 }}" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"></td>
                       
                         <td>
-                          <div class="alert" id="hidden{{ forloop.counter0 }}" style="display:none"  >{{word.word}}</div>
+                          <div class="alert" id="hidden{{ forloop.counter0 }}" style="display:none"  >{{object.item}}</div>
                           
                         </td>
                         
