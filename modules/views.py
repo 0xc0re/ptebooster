@@ -109,7 +109,15 @@ class ReorderParagraphView(AbstractListView):
     model = ReorderParagraph
     template_name = 'questions\\reorder-paragraph.html'
     paginate_by = 1
-   
+    def get_queryset(self):
+        queryset = super(ReorderParagraphView, self).get_queryset()
+        for item in queryset:
+            
+            item.answer = [item.option_1,item.option_2,item.option_3,item.option_4]
+            if item.option_5:(item.answer).append(item.option_5)
+       
+            
+        return queryset
 class MultipleSelectionView(AbstractListView):
     model = MultipleSelection
     template_name = 'questions\multiple-selection.html'

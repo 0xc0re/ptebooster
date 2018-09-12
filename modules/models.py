@@ -96,7 +96,7 @@ class AnswerShortQuestions(StatusAbstract):
     item = models.CharField(max_length=90,blank=False)
 
 class ReorderParagraph(AbstractChoices):
-    option_5 = models.CharField(max_length=150,blank=False)
+    option_5 = models.TextField(max_length=500,blank=False)
     
 
 class AbstractSelection(StatusAbstract):

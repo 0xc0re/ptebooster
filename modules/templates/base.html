@@ -147,6 +147,30 @@
         });
      }); 
    </script>
+
+   <script>
+      $(".checkParagraph").click(function(){
+        var answers = new Array();
+        $(".answerlist").each(function(){
+          
+          answers.push($(this).val());
+        })
+       
+        $("#list2 li").each(function(i){
+          
+          if ($(this).attr('value')===answers[i]){
+            
+            $(this).css('background-color','green');
+          }else{
+            $(this).css('background-color','red');
+          }
+          i+=1
+        });
+        
+      });
+   
+  </script>
+
    <!-- Fill in the blanks listening starts -->
    <script>
       $(".checkButton").click(function(){
